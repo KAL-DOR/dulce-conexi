@@ -1,5 +1,8 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { AlertTriangle, CheckCircle2, FileDown, Calculator } from "lucide-react";
+import { useState } from "react";
+import { AprobarTimbradoModal } from "@/components/modals/AprobarTimbradoModal";
+import { SimuladorTarifasModal } from "@/components/modals/SimuladorTarifasModal";
 
 const summary = {
   facturas: 4200,
@@ -21,6 +24,9 @@ const alertas = [
 ];
 
 const Facturacion = () => {
+  const [timbradoOpen, setTimbradoOpen] = useState(false);
+  const [simuladorOpen, setSimuladorOpen] = useState(false);
+
   return (
     <AppLayout>
       <div className="animate-fade-in space-y-5">
@@ -88,7 +94,10 @@ const Facturacion = () => {
 
         {/* Actions */}
         <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 px-4 py-2 rounded-md text-sm border border-border text-foreground hover:bg-secondary transition-colors">
+          <button
+            onClick={() => setSimuladorOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-md text-sm border border-border text-foreground hover:bg-secondary transition-colors"
+          >
             <Calculator className="h-4 w-4" />
             Simulador
           </button>
@@ -96,12 +105,26 @@ const Facturacion = () => {
             <FileDown className="h-4 w-4" />
             Exportar
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 rounded-md text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors ml-auto">
+          <button
+            onClick={() => setTimbradoOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-md text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors ml-auto"
+          >
             <CheckCircle2 className="h-4 w-4" />
             Aprobar timbrado
           </button>
         </div>
       </div>
+
+      <AprobarTimbradoModal
+        open={timbradoOpen}
+        onOpenChange={setTimbradoOpen}
+        facturas={summary.facturas}
+        onConfirm={() => {}}
+      />
+      <SimuladorTarifasModal
+        open={simuladorOpen}
+        onOpenChange={setSimuladorOpen}
+      />
     </AppLayout>
   );
 };
