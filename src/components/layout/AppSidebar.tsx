@@ -11,15 +11,27 @@ import {
   ChevronLeft,
   ChevronRight,
   Droplets,
+  HardHat,
+  CheckSquare,
+  Stamp,
+  CreditCard,
+  AlertTriangle,
+  Printer,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/" },
+  { icon: HardHat, label: "Factibilidades", path: "/factibilidades" },
   { icon: FileText, label: "Contratos", path: "/contratos" },
   { icon: BarChart3, label: "Lecturas", path: "/lecturas" },
+  { icon: CheckSquare, label: "Validación", path: "/validacion-lecturas" },
   { icon: Receipt, label: "Facturación", path: "/facturacion" },
+  { icon: Stamp, label: "Timbrado CFDI", path: "/timbrado" },
+  { icon: Printer, label: "Impresión", path: "/impresion" },
   { icon: Wallet, label: "Recaudación", path: "/cobro" },
+  { icon: CreditCard, label: "Ajustes", path: "/ajustes" },
+  { icon: AlertTriangle, label: "Cartera", path: "/cartera" },
   { icon: ClipboardList, label: "Órdenes", path: "/ordenes" },
 ];
 
