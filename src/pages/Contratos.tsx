@@ -2,6 +2,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Link } from "react-router-dom";
 import { Plus, Search, Filter, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { NuevoContratoSheet } from "@/components/modals/NuevoContratoSheet";
 
 const contracts = [
   { id: "12345", titular: "María García López", toma: "Hidalgo #42", tipo: "Doméstico", status: "Activo", saldo: "$1,040.00", ultimaLectura: "1,256 m³" },
@@ -23,6 +24,7 @@ const statusColors: Record<string, string> = {
 const Contratos = () => {
   const [filterStatus, setFilterStatus] = useState("Todos");
   const [search, setSearch] = useState("");
+  const [nuevoContratoOpen, setNuevoContratoOpen] = useState(false);
 
   const filtered = contracts.filter((c) => {
     const matchStatus = filterStatus === "Todos" || c.status === filterStatus;
@@ -44,7 +46,10 @@ const Contratos = () => {
               {filtered.length} contratos
             </p>
           </div>
-          <button className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
+          <button
+            onClick={() => setNuevoContratoOpen(true)}
+            className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors"
+          >
             <Plus className="h-4 w-4" />
             Nuevo Contrato
           </button>
@@ -155,6 +160,8 @@ const Contratos = () => {
           </table>
         </div>
       </div>
+
+      <NuevoContratoSheet open={nuevoContratoOpen} onOpenChange={setNuevoContratoOpen} />
     </AppLayout>
   );
 };

@@ -1,6 +1,7 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Plus, Filter, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { NuevaOrdenModal } from "@/components/modals/NuevaOrdenModal";
 
 const orders = [
   { id: "ORD-4530", tipo: "Corte", toma: "Juárez #118", asignado: "R. Martínez", prioridad: "Alta", status: "En progreso", fecha: "18 Feb 2026" },
@@ -27,6 +28,7 @@ const prioridadColors: Record<string, string> = {
 
 const Ordenes = () => {
   const [filterStatus, setFilterStatus] = useState("Todos");
+  const [nuevaOrdenOpen, setNuevaOrdenOpen] = useState(false);
 
   const filtered = orders.filter(
     (o) => filterStatus === "Todos" || o.status === filterStatus
@@ -40,7 +42,10 @@ const Ordenes = () => {
             <h1 className="text-xl font-bold text-foreground">Órdenes de Trabajo</h1>
             <p className="text-sm text-muted-foreground">{filtered.length} órdenes</p>
           </div>
-          <button className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
+          <button
+            onClick={() => setNuevaOrdenOpen(true)}
+            className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors"
+          >
             <Plus className="h-4 w-4" />
             Nueva Orden
           </button>
@@ -109,6 +114,8 @@ const Ordenes = () => {
           </table>
         </div>
       </div>
+
+      <NuevaOrdenModal open={nuevaOrdenOpen} onOpenChange={setNuevaOrdenOpen} />
     </AppLayout>
   );
 };
